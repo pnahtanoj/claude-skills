@@ -48,7 +48,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 Installs skills into `~/.claude/skills/` so they're available in every project.
 
 ```sh
-git clone https://github.com/YOUR_ORG/claude-skills.git ~/Repos/claude-skills
+git clone https://github.com/pnahtanoj/claude-skills.git ~/Repos/claude-skills
 cd ~/Repos/claude-skills
 ./install.sh
 ```
