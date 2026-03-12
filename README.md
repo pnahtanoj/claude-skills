@@ -39,6 +39,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | Skill | What it does |
 |---|---|
 | `context-handoff` | Captures session state into a structured handoff — either a human-readable session summary or a CLAUDE.md block for Claude Code |
+| `skills-repo` | Manages this repo — add, update, or remove skills and keeps the skill directory, `install.sh`, and README table in sync |
 
 ---
 
@@ -149,6 +150,8 @@ claude-skills/
 ├── context-handoff/
 │   ├── SKILL.md
 │   └── references/
+├── skills-repo/
+│   └── SKILL.md
 │       ├── handoff-formats.md
 │       ├── mcp-usage.md
 │       └── examples.md

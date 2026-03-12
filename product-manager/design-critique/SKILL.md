@@ -4,9 +4,10 @@ description: >
   Review and critique a product design, user flow, or design document and return
   a prioritized list of issues, gaps, and risks. Use this skill whenever a user
   shares a design artifact and wants critical evaluation — wireframes, flows,
-  specs, or mockups. Triggers on phrases like "critique this design", "review
-  this flow", "does this hold up", "give me feedback on this design", or "what
-  are the problems with this". Do not trigger for general questions like "does
+  specs, mockups, or requirements documents. Triggers on phrases like "critique this design", "review
+  this user flow", "does this design hold up", "give me feedback on this design", "what
+  are the problems with this", "review the PRD", "review the spec", or "give me feedback on the PRD".
+  Do not trigger for general questions like "does
   this make sense?", "what am I missing?" in non-design contexts, architecture
   discussions, or code reviews — use the appropriate skill for those instead.
 ---
