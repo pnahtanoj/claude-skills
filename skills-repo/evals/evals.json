@@ -1,0 +1,23 @@
+{
+  "skill_name": "skills-repo",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I want to add a new skill for writing conventional git commit messages. It should help format commits like 'feat(auth): add JWT support' and know when to use fix vs feat vs chore etc.",
+      "expected_output": "Creates the skill directory and SKILL.md, updates install.sh with a flat cp -r line, adds a row to the README table, re-runs install, and commits.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "The code-review skill needs to handle Python too — right now it only has a js-gotchas.md reference file. Can you add a python-gotchas.md with common Python pitfalls and update the skill to use it?",
+      "expected_output": "Adds python-gotchas.md to the references/ directory, updates the skill's SKILL.md to reference it, re-runs install, and commits.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Remove the browser-extension-scaffold skill from the repo — we're not building browser extensions anymore.",
+      "expected_output": "Deletes the skill directory, removes its cp -r line from install.sh and its output list entry, removes its README row, deletes the installed copy from ~/.claude/skills/, and commits.",
+      "files": []
+    }
+  ]
+}
