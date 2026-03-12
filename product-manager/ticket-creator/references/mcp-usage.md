@@ -1,9 +1,13 @@
 # MCP Tool Usage Notes
 
-## When This Skill Uses MCP Tools
+> **Status: future / secondary path.** The primary output for ticket-creator is
+> local markdown files (see Step 2b in SKILL.md). MCP posting is a potential
+> enhancement once local file output is stable.
 
-If GitHub or Linear/Jira MCP tools are available, ticket-creator can post
-tickets directly or pre-fill templates rather than just producing markdown.
+## When This Skill May Use MCP Tools
+
+If GitHub or Linear/Jira MCP tools are available in a future version, ticket-creator
+could post tickets directly or pre-fill templates rather than writing local files.
 
 ### GitHub Issues
 - Use `create_issue` to post the ticket directly after user approval
@@ -17,6 +21,6 @@ tickets directly or pre-fill templates rather than just producing markdown.
 - Use `create_issue` with project key and issue type
 - Map: Title → summary, Background → description, AC → acceptance criteria field
 
-**How to use:** After presenting a drafted ticket, if a relevant MCP tool is
-connected, offer: *"Want me to post this directly to [GitHub/Linear/Jira]?"*
+**If/when implemented:** After writing the local file, if a relevant MCP tool is
+connected, offer: *"Want me to also post this to [GitHub/Linear/Jira]?"*
 Wait for explicit confirmation before creating any issue.

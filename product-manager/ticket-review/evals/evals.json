@@ -1,0 +1,23 @@
+{
+  "skill_name": "ticket-review",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I've got some tickets in the tickets/ folder — can you review them for gaps and fix any issues you find?",
+      "expected_output": "Tickets are reviewed, gaps identified (vague AC, missing Out of Scope, untestable criteria), fixes applied in-place, and a summary report is produced showing what changed.",
+      "files": ["/tmp/ticket-review-evals/eval-1-thin/tickets/"]
+    },
+    {
+      "id": 2,
+      "prompt": "/ticket-review",
+      "expected_output": "Skill is invoked via slash command, reviews tickets, determines they are already high quality, confirms clean with minimal passes (ideally 1), and produces a summary report.",
+      "files": ["/tmp/ticket-review-evals/eval-2-clean/tickets/"]
+    },
+    {
+      "id": 3,
+      "prompt": "Are my tickets good enough to hand off to engineering? Check them and fix anything that isn't.",
+      "expected_output": "Real-world meeting-meter tickets are audited. Some gaps may be found and fixed. Summary report shows per-ticket results with pass count.",
+      "files": ["/tmp/ticket-review-evals/eval-3-real/tickets/"]
+    }
+  ]
+}

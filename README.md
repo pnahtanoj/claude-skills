@@ -23,6 +23,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `design-critique` | Reviews designs across 5 dimensions (UX, visual, feasibility, scope, goal consistency) and returns a prioritized, severity-rated findings list |
 | `feature-prioritization` | Stack-ranks features against explicit criteria (impact, fit, effort, confidence, risk) with a visible recommendation |
 | `ticket-creator` | Transforms rough ideas into complete engineering tickets with user story, acceptance criteria, test scenarios, and out-of-scope bounds |
+| `ticket-review` | Audits existing tickets in `tickets/` for gaps, vague criteria, and missing scope — fixes them in place and reports what changed |
 
 ### Developer
 
@@ -181,6 +182,8 @@ claude-skills/
     ├── ticket-creator/
     │   ├── SKILL.md
     │   └── references/
+    ├── ticket-review/
+    │   └── SKILL.md
     └── user-story-flow/
         ├── SKILL.md
         └── references/

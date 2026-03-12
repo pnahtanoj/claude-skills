@@ -66,13 +66,54 @@ Once clarifications are resolved (or the user says "just draft it"):
 
 ---
 
-## Step 3: Surface Assumptions and Offer to Refine
+## Step 2b: Determine Output Path
 
-After presenting the draft:
+Before writing, resolve where the ticket file should live:
+
+1. **Infer a task/feature grouping** from available context, in priority order:
+   - Current git branch name (strip prefixes like `feature/`, `fix/`, `chore/`)
+   - A PRD or requirements doc open or referenced in the session
+   - The session topic if it clearly maps to a single feature
+   - If none of the above apply, use no subdirectory (flat in `tickets/`)
+
+2. **Determine the next sequential number** by scanning existing files in the target directory. If the directory doesn't exist yet, start at `0001`.
+
+3. **Construct the file path:**
+   - With grouping: `tickets/<feature-name>/<NNNN>-<ticket-slug>.md`
+   - Without grouping: `tickets/<NNNN>-<ticket-slug>.md`
+   - Ticket slug: lowercase, hyphen-separated, derived from the ticket title (max ~5 words)
+
+4. **Write the file** using the Write tool. Create parent directories as needed.
+
+5. **Tell the user the path** where the ticket was written.
+
+---
+
+## Step 3: Self-Review Loop
+
+After writing all ticket files, run a gap review before surfacing anything to the user:
+
+1. Re-read each ticket against the quality bar in `references/ticket-template.md` and the original user input.
+2. Check for: missing acceptance criteria, untested edge cases, vague scope, empty Out of Scope, over-prescribed implementation, or any gap between what the user described and what the ticket captures.
+3. If gaps are found — fix them silently, re-write the affected files, and run the review again.
+4. Repeat up to **5 passes** until no gaps remain.
+5. When the review passes cleanly (or the iteration limit is reached), tell the user:
+   - How many review passes were needed
+   - A one-line summary of what was fixed (if anything), e.g. *"Fixed: added error states to tickets 2 and 4, tightened scope on ticket 3."*
+   - If the limit was hit without a clean pass, flag the remaining gaps explicitly.
+
+---
+
+## Step 4: Surface Assumptions and Iterate
+
+After the self-review loop:
 
 1. **Explicitly list any assumptions you made** — especially where you drew on project context rather than explicit user input. This lets the user catch anything you got wrong without having to read the whole ticket. Format as a brief bulleted list.
-2. Offer to adjust: *"Want me to tweak the scope, add edge cases, or split this
-   into smaller tickets?"*
+2. Invite feedback: *"Want me to tweak the scope, add edge cases, or split this into smaller tickets?"*
+3. **Keep iterating until:**
+   - The user says they're happy, or
+   - The user gives no further feedback
+   Each round of feedback triggers a new self-review loop (Step 3) on the affected tickets, with files updated in place. Surface a brief summary of what changed after each round.
 
 ---
 
@@ -110,3 +151,6 @@ Failure patterns to avoid. Update this section when new ones are observed.
 - **Never present output that fails the quality bar** — fix it first, then present.
 - **When the user approves an output as good, save it as an example.** Append it to `references/examples.md` (create the file if it does not exist) under a dated heading. Future runs should check this file for approved output patterns and match their style and depth.
 - **Use subagents for ticket splitting.** If a feature is complex enough to warrant 3+ tickets, spawn parallel subagents to draft each ticket simultaneously, then review for dependency ordering and conflicts before presenting.
+- **Always write the ticket to a local file.** Do not only output to the conversation. The file is the artifact; the conversation output is a summary.
+- **Never hardcode a subdirectory.** Infer the grouping from branch/PRD/context — don't ask the user for a folder name unless there is truly no signal.
+- **MCP posting is not the primary path.** Do not offer to post to GitHub/Linear/Jira unless explicitly asked.
