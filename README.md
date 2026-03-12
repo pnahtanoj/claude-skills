@@ -67,6 +67,37 @@ To add skills to a specific project only, copy into `.claude/skills/` at the pro
 cp -r context-handoff developer product-manager /path/to/your-project/.claude/skills/
 ```
 
+### Project-level install via git submodule
+
+For teams that want skills pinned to a specific version and committed to the project repo, use a submodule. This means everyone who clones the repo gets the same skills automatically.
+
+```sh
+# In your project root
+git submodule add https://github.com/pnahtanoj/claude-skills.git .claude/skills
+git commit -m "Add claude-skills as submodule"
+```
+
+Team members cloning the repo for the first time:
+
+```sh
+git clone --recurse-submodules https://github.com/your-org/your-repo.git
+# or, if already cloned:
+git submodule update --init
+```
+
+To update to a newer version of the skills:
+
+```sh
+git submodule update --remote .claude/skills
+git commit -m "Update claude-skills to latest"
+```
+
+**Tradeoffs vs global install:**
+- Skills travel with the repo and are version-pinned — good for team consistency
+- Updating is a manual, deliberate step — you won't pick up changes accidentally
+- `git clone` requires `--recurse-submodules` or a follow-up init step, which is easy to forget
+- Submodules have a reputation for being confusing; global install is simpler for most teams
+
 ---
 
 ## Usage
