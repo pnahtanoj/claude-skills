@@ -57,8 +57,17 @@ cd ~/Repos/claude-skills
 Or install manually:
 
 ```sh
-cp -r context-handoff developer product-manager ~/.claude/skills/
+mkdir -p ~/.claude/skills
+cp -r context-handoff ~/.claude/skills/
+cp -r developer/architecture-decision developer/browser-extension-scaffold \
+      developer/code-review developer/stack-decision developer/test-writer \
+      ~/.claude/skills/
+cp -r product-manager/design-critique product-manager/feature-prioritization \
+      product-manager/requirements-doc product-manager/ticket-creator \
+      product-manager/user-story-flow ~/.claude/skills/
 ```
+
+> **Note:** Skills must be installed flat into `~/.claude/skills/<skill-name>/` — Claude Code discovers skills one level deep only. The category folders (`developer/`, `product-manager/`) are for repo organisation and are not reproduced in the install location.
 
 ### Project-level install
 
