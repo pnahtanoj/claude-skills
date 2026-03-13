@@ -33,23 +33,7 @@ For browser extension popup code, always configure jsdom so DOM APIs and `sessio
 
 Add this as the first line comment in the test file. This tells Vitest to use jsdom for this file without needing a global config change.
 
-For `chrome.*` APIs, mock them manually — they don't exist in jsdom:
-
-```js
-global.chrome = {
-  tabs: {
-    query: vi.fn().mockResolvedValue([]),
-  },
-  storage: {
-    local: {
-      get: vi.fn().mockResolvedValue({}),
-      set: vi.fn().mockResolvedValue(undefined),
-    },
-  },
-};
-```
-
-Only mock what the code under test actually uses.
+**If the source file uses any `chrome.*` APIs, `navigator.clipboard`, or manages timers** — load `references/chrome-extension.md` before writing the test file. It contains ready-to-use mock patterns for `chrome.storage.local`, `chrome.storage.session`, `navigator.clipboard`, `setInterval`/`setTimeout` cleanup, and async message passing, along with common pitfalls. Use only the mocks the code under test actually calls.
 
 ## sessionStorage
 
