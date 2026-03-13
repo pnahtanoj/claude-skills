@@ -20,6 +20,7 @@ Your job is to read a JavaScript source file, understand what it does, and write
 ## Test file location and naming
 
 - Place the test file alongside the source: if source is `popup.js`, tests go in `popup.test.js`
+- Match the source file extension: `.jsx` sources get `.test.jsx` test files, not `.test.js`
 - Use `describe` blocks to group related tests
 - Use `it()` with plain-English descriptions: `it('returns zero cost for zero elapsed time')`
 
@@ -67,7 +68,7 @@ Don't write tests for things that can't fail (e.g. a function that just sets a c
 
 ## vitest.config.js template
 
-If no config exists at the project root, check whether the project uses a framework (Preact, React, Vue, Svelte) or TypeScript. If it does, load `references/frameworks.md` for the right config template. For vanilla JS, use:
+If no config exists at the project root, first check for a `vite.config.js` — if one exists, mirror its plugins in `vitest.config.js` rather than starting from scratch. Then check whether the project uses a framework (Preact, React, Vue, Svelte) or TypeScript and load `references/frameworks.md` for the right config template. For vanilla JS, use:
 
 ```js
 // vitest.config.js

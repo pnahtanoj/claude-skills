@@ -2,6 +2,8 @@
 
 Load this reference when the project uses a UI framework (Preact, React, Vue, Svelte, etc.) and no `vitest.config.js` exists yet.
 
+**Before creating a new config**: check if `vite.config.js` already exists. If it does, copy its `plugins` array into `vitest.config.js` rather than writing one from scratch — this ensures the test environment matches the build environment.
+
 ---
 
 ## Preact + Vite
