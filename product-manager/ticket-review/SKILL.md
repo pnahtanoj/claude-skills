@@ -2,13 +2,16 @@
 name: ticket-review
 description: >
   Audit existing tickets in a tickets/ directory for gaps, missing criteria,
-  vague scope, and quality issues — then fix them in place. Use this skill
-  whenever a user wants to review pre-existing tickets, check ticket quality,
-  or audit a backlog. Triggers on phrases like "review my tickets", "check
-  tickets for gaps", "audit the backlog", "are my tickets good enough", or
-  "/ticket-review". Also trigger when a user starts a session in a repo with
-  a tickets/ directory and asks for a quality check. Do NOT trigger for writing
-  new tickets — use ticket-creator for that.
+  vague scope, quality issues, or misalignment with a PRD — then fix them in
+  place. Use this skill whenever a user wants to review pre-existing tickets,
+  check ticket quality, audit a backlog, OR cross-reference tickets against a
+  PRD or spec after changes. Triggers on phrases like "review my tickets",
+  "check tickets for gaps", "audit the backlog", "are my tickets good enough",
+  "do the tickets reflect the PRD", "check if tickets need updates after PRD
+  changes", "are the tickets aligned with the spec", "update tickets based on
+  PRD revisions", or "/ticket-review". Also trigger when a user has just
+  updated a PRD and asks whether the tickets need to change. Do NOT trigger for
+  writing new tickets — use ticket-creator for that.
 ---
 
 # Ticket Review Skill
@@ -26,7 +29,32 @@ them in place, and report what changed.
 
 ---
 
-## Step 2: Load Quality Standards
+## Step 2: Check for PRD Context
+
+Before reviewing tickets, check whether this review is PRD-driven:
+
+1. Look for a PRD or requirements doc in the project (common locations: `docs/`,
+   `product/`, repo root — filenames like `PRD.md`, `requirements.md`,
+   `spec.md`).
+2. If the user mentioned a PRD change or the session context implies one, load
+   that document.
+3. If a PRD is found, run a **PRD alignment pass** before the quality pass:
+   - For each ticket, check whether its scope, acceptance criteria, and user
+     story still match the current PRD.
+   - Flag or fix: tickets that reference removed features, tickets missing
+     coverage for new PRD sections, and acceptance criteria that contradict
+     the updated requirements.
+   - If a ticket covers a feature the PRD no longer includes, flag it as an
+     open question rather than deleting scope — the user may want to close it.
+   - If the PRD adds new requirements with no corresponding ticket, note them
+     in the report as **coverage gaps** (new tickets may be needed — suggest
+     using ticket-creator for those).
+4. If no PRD is found and this appears to be a PRD-driven review, ask the user
+   where the PRD lives before proceeding.
+
+---
+
+## Step 3: Load Quality Standards
 
 Load `~/.claude/skills/ticket-creator/references/ticket-template.md` for the
 quality bar and required ticket structure. This is the canonical standard all
@@ -42,7 +70,7 @@ If that file is not available, fall back to these quality criteria:
 
 ---
 
-## Step 3: Review and Fix Loop
+## Step 4: Review and Fix Loop
 
 Run up to **5 passes** over all tickets:
 
@@ -73,7 +101,7 @@ Run up to **5 passes** over all tickets:
 
 ---
 
-## Step 4: Report
+## Step 5: Report
 
 After the loop completes, report to the user:
 
@@ -87,11 +115,15 @@ After the loop completes, report to the user:
 3. **What was fixed** — a brief bulleted list of the most significant changes
    (skip trivial ones like whitespace).
 
-4. **Remaining issues** — if the iteration limit was hit before a clean pass,
+4. **PRD coverage gaps** (if a PRD was reviewed) — list any new PRD requirements
+   with no corresponding ticket. For each, suggest a one-line ticket title and
+   note that ticket-creator can flesh it out.
+
+5. **Remaining issues** — if the iteration limit was hit before a clean pass,
    explicitly list what still needs attention and why it wasn't auto-fixable
    (e.g. requires product decision, missing information only the author has).
 
-5. **Invite another round** — after presenting the report, ask: *"Want me to review again, or are these ready to hand off?"* Keep iterating until:
+6. **Invite another round** — after presenting the report, ask: *"Want me to review again, or are these ready to hand off?"* Keep iterating until:
    - The user says they're satisfied, or
    - A full pass finds zero gaps
    Each new round runs the full review loop (Step 3) again. This catches anything introduced by prior fixes and lets the user direct focus (e.g. "focus on ticket 3" or "check the edge cases more carefully").
