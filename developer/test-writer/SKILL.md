@@ -67,7 +67,7 @@ Don't write tests for things that can't fail (e.g. a function that just sets a c
 
 ## vitest.config.js template
 
-If no config exists at the project root:
+If no config exists at the project root, check whether the project uses a framework (Preact, React, Vue, Svelte) or TypeScript. If it does, load `references/frameworks.md` for the right config template. For vanilla JS, use:
 
 ```js
 // vitest.config.js
