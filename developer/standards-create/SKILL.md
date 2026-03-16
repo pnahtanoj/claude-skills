@@ -1,11 +1,23 @@
 ---
 name: standards-create
-description: Author a STANDARDS.md file from scratch for a project — explore the codebase, surface existing conventions, interview the user about team preferences, and produce a checkable standards document grounded in the actual repo. Use this skill whenever the user wants to set up coding standards, create a STANDARDS.md, document conventions, establish a style guide, or says things like "set up standards for this repo", "create a STANDARDS.md", "write up our coding conventions", "I want to document how we do things", "establish guidelines for this project", or "we need a style guide". Also trigger when the user wants to onboard new contributors and needs a reference document, or asks what standards/conventions to follow before writing code. Do NOT trigger for checking or enforcing existing standards — use `standards-check` for that.
+description: Author or update a STANDARDS.md — explore the codebase, surface existing conventions, interview the user about team preferences, and produce a grounded, checkable standards document. Use this skill whenever the user wants to set up coding standards, create a STANDARDS.md, add a rule to an existing standards doc, update or change a standard, document conventions, establish a style guide, or says things like "set up standards for this repo", "create a STANDARDS.md", "write up our coding conventions", "I want to document how we do things", "establish guidelines for this project", "add this to our standards", "should this be in our standards", "we need a style guide", or "update our coding standards". Also trigger when the user makes a code style decision (like preferring braces or a naming convention) and asks whether it should be captured in standards. Do NOT trigger for checking or enforcing existing standards — use `standards-check` for that.
 ---
 
 # Standards Create Skill
 
 Your job is to produce a `STANDARDS.md` file grounded in the actual codebase — not a generic template. The best standards documents reflect what the team already does well (making it explicit) plus a few deliberate decisions about things the codebase is inconsistent on.
+
+## Existing STANDARDS.md vs. creating from scratch
+
+If a `STANDARDS.md` already exists, read it first. You're adding to or amending a living document, not replacing it. Follow the same explore → interview → propose → write sequence, but scope your work to the change at hand:
+
+- If the user made a specific style decision (e.g., "I prefer braces around all if-body statements"), propose the rule, check it doesn't conflict with existing tooling (Prettier, ESLint, etc.), and write it into the right section
+- If the user asks "should this be in our standards?", give your recommendation with reasoning before writing anything
+- If you're adding a new category, make sure it fits the existing document's structure and tone
+
+The same quality bar applies regardless: specific, checkable, and reasoned.
+
+---
 
 ## Phase 1: Explore the codebase
 
