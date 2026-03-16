@@ -75,6 +75,22 @@ Group findings by severity. Within each tier, list findings in file order. Skip 
 
 If there are no findings, say so plainly: "No issues found." Don't invent feedback to fill space.
 
+## Iteration loop
+
+After presenting findings, fix all Critical and Major issues directly in the files, then re-review. Run up to **3 passes** total:
+
+1. Review → fix Critical/Major → re-review
+2. Review → fix any remaining Critical/Major → re-review
+3. Final review — report what remains
+
+Exit the loop early if a pass finds no Critical or Major findings. Minor and Nit items are reported but not auto-fixed — present them to the user at the end and ask if they want another pass focused on those.
+
+After the loop completes, report:
+- **Pass count** — how many review cycles ran
+- **What was fixed** — a brief list of the most significant changes
+- **Remaining issues** — anything Minor/Nit, or Critical/Major that couldn't be auto-fixed (e.g. requires a product decision or architectural change the implementer needs to make)
+- Then ask: *"Want me to go another round on the remaining items, or is this good to ship?"*
+
 ## Tone
 
 Be direct, not harsh. The goal is to help, not to demonstrate thoroughness. A three-item review that catches the real problems is better than a fifteen-item review padded with Nits. If the code is good, say so.
