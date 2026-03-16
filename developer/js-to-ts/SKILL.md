@@ -5,7 +5,9 @@ description: Migrate a JavaScript project to TypeScript — audit files, install
 
 # JS to TypeScript Migration Skill
 
-Migrate a JavaScript project to TypeScript in a controlled, iterative way. The goal is a clean build with no `any` escapes — but get it compiling first, then tighten types.
+Migrate a JavaScript project to TypeScript in a controlled, iterative way. The goal is a clean `tsc --noEmit` build with no `any` escapes — but get it compiling first, then tighten types.
+
+The skill's main value is the **structured workflow** — particularly the audit before touching files and the tsc iteration loop. The tsconfig settings themselves (jsxImportSource, moduleResolution, etc.) you already know; the skill keeps you from skipping steps.
 
 ---
 
@@ -13,85 +15,73 @@ Migrate a JavaScript project to TypeScript in a controlled, iterative way. The g
 
 Before touching any files:
 
-1. Read `package.json` — identify the build tool (Vite, webpack, esbuild, none), existing scripts, and any `@types/*` packages already installed.
-2. Scan for `.js` and `.jsx` files — list them, note which are entry points, which are utilities, which have complex logic.
-3. Check if `tsconfig.json` already exists. If it does, read it — don't overwrite settings the user has already made.
-4. Check if the project uses a framework (Preact, React, Vue) — affects which tsconfig lib/jsx settings to use.
-5. Check for a `vite.config.js` or other build config — it may need updating.
+1. Read `package.json` — identify the build tool (Vite, webpack, none), existing scripts, and any `@types/*` already installed.
+2. Scan for `.js` and `.jsx` files — list them, note which are entry points, utilities, components.
+3. Check if `tsconfig.json` already exists. If it does, read it — do not overwrite it. Work with what's there.
+4. Check the framework (Preact, React, Vue, none) — affects tsconfig jsx settings.
+5. Check for `vite.config.js` or similar build config.
 
-Summarise what you found before proceeding. If anything is ambiguous (e.g. unclear build target, mixed CJS/ESM), ask before continuing.
+Summarise what you found and confirm before proceeding. If anything is ambiguous, ask.
 
 ---
 
 ## Step 2: Install TypeScript
 
-If TypeScript is not already in `devDependencies`:
+If TypeScript is not in `devDependencies`, install it:
 
 ```bash
 npm install -D typescript
 ```
 
-For common frameworks, also install type definitions:
-- **Browser extension**: `npm install -D @types/chrome`
-- **Node**: `npm install -D @types/node`
-- **React**: `npm install -D @types/react @types/react-dom`
-- Preact ships its own types — no `@types/preact` needed
-
-Only install what the project actually uses.
+Install `@types/*` for whatever APIs the project actually uses — `@types/chrome` for browser extensions, `@types/node` for Node, etc. Preact ships its own types.
 
 ---
 
 ## Step 3: Add tsconfig.json
 
-If no `tsconfig.json` exists, load `references/tsconfig-templates.md` and choose the right template for the project's stack. Write it to the project root.
+If no `tsconfig.json` exists, create one appropriate for the project's stack. Always include:
+- `"strict": true` — don't start loose and promise to tighten later
+- `"noEmit": true` if a bundler (Vite, etc.) handles compilation
+- Correct `"jsx"` and `"moduleResolution"` for the stack
+- `"lib"` entries that cover the APIs actually used — e.g. `["ES2020", "DOM"]` if the code touches `document`, `crypto`, `Intl`, or other browser globals; `ES2020` alone won't cover them
 
-Key settings to always include:
-- `"strict": true` — catches the most bugs; don't start with a loose config and promise to tighten later
-- `"noEmit": true` if Vite or another tool handles compilation (TS is just for type-checking)
-- `"moduleResolution": "bundler"` for Vite projects
-- Correct `"jsx"` setting for the framework in use
+Load `references/tsconfig-templates.md` if you need a starting point for an unfamiliar stack.
 
 ---
 
 ## Step 4: Rename files
 
-Rename files in this order — entry points and utilities first, so downstream files have typed imports to work with:
-
-- `.js` → `.ts`
-- `.jsx` → `.tsx`
-
-Don't rename config files (`vite.config.js`, `vitest.config.js`) unless the user specifically wants to — they usually work fine as JS.
+Rename `.js` → `.ts` and `.jsx` → `.tsx`. Prioritise entry points and utilities first so downstream files have typed imports to work with. Don't rename build config files (`vite.config.js`, etc.) unless asked.
 
 After renaming, run the type checker to get the initial error count:
 
 ```bash
-npx tsc --noEmit
+npx tsc --noEmit 2>&1 | tail -20
 ```
 
-Report the count to the user before starting fixes.
+Report the count before starting fixes.
 
 ---
 
-## Step 5: Fix type errors — iterative loop
+## Step 5: Fix type errors — tsc iteration loop
 
-Run up to **5 passes**:
+This is the core of the migration. Run up to **5 passes**:
 
 ### Each pass:
-1. Run `npx tsc --noEmit` and read the output.
-2. Fix errors in priority order:
-   - **Missing types on function parameters and return values** — add explicit types
-   - **`possibly undefined` / `possibly null`** — add null checks or non-null assertions where safe
-   - **Implicit `any`** — type the value properly; use `unknown` if the shape is genuinely unknown, not `any`
-   - **Module resolution errors** — check import paths; `.js` extensions in imports may need updating
-3. After fixing, re-run and check the new count.
+1. Run `npx tsc --noEmit` and read all errors.
+2. Fix errors by priority:
+   - **Unresolved names** (missing `@types/*`, wrong `lib`) — fix the config or install types
+   - **Missing parameter/return types** — add explicit types
+   - **`possibly undefined` / `possibly null`** — add null checks or narrow the type
+   - **Implicit `any`** — type the value properly; use `unknown` for genuinely unknown shapes
+   - **Module resolution errors** — check import paths
+3. Re-run `tsc --noEmit` and check the new error count.
 4. Exit early if error count reaches zero.
 
-### What NOT to do:
-- Don't use `// @ts-ignore` or `any` to silence errors — fix the underlying issue. If a fix genuinely requires a product decision (e.g. "should this function accept null?"), flag it as an open question rather than papering over it.
-- Don't add types that are more permissive than the actual runtime behaviour — a function that always returns a string shouldn't be typed as `string | undefined`.
-
-### If an error is genuinely unresolvable in this pass:
-Add a `// TODO(ts-migration): [reason]` comment and move on. List these at the end.
+### Hard rules:
+- No `// @ts-ignore` or `any` to silence errors — fix the underlying issue
+- If a fix requires a product decision (e.g. "should this accept null?"), add `// TODO(ts-migration): [reason]` and move on — list these at the end
+- Don't add types more permissive than actual runtime behaviour
 
 ---
 
@@ -99,27 +89,16 @@ Add a `// TODO(ts-migration): [reason]` comment and move on. List these at the e
 
 After a clean `tsc --noEmit`:
 
-- **Vite**: Vite handles `.ts`/`.tsx` natively — no plugin needed. Check `vite.config.js` still references the right entry points.
-- **Test runner**: If using Vitest, it also handles TS natively. Check `vitest.config.js` — load `references/tsconfig-templates.md` if the test config needs updating.
-- **`package.json` scripts**: If there was a `build` or `check` script, consider adding a `"typecheck": "tsc --noEmit"` script so CI can run type checking separately.
+- **Vite** handles `.ts`/`.tsx` natively — verify entry points still resolve
+- **package.json** — add `"typecheck": "tsc --noEmit"` if it's missing, so CI can run type checking independently
+- **Test runner** — Vitest also handles TS natively; no config change usually needed
 
 ---
 
 ## Step 7: Report
 
-After the loop completes:
-
 1. **Error count trajectory** — started at N, finished at M after P passes
-2. **What was typed** — brief summary of the most significant type additions
-3. **Open questions** — any `TODO(ts-migration)` items that need a product or architectural decision
-4. **Remaining `any` uses** — list them; ask if the user wants to tighten them now or track them separately
-5. Ask: *"Want me to do another pass to tighten types further, or is this good enough to ship?"*
-
----
-
-## Rules
-
-- Always run `tsc --noEmit` to verify, never assume a fix worked.
-- Prefer explicit types over inferred ones at function boundaries — inference is fine inside function bodies.
-- If the project has tests, run them after migration to catch runtime regressions.
-- Don't rename config files unless asked.
+2. **What was typed** — most significant type additions
+3. **Open questions** — `TODO(ts-migration)` items requiring product/architectural decisions
+4. **Remaining `any` uses** — list them; ask if the user wants to tighten now or track separately
+5. Ask: *"Want me to do another pass to tighten types further, or is this good to ship?"*
