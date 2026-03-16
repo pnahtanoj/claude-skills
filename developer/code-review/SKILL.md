@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Review code for bugs, correctness, security issues, and maintainability. Produce a prioritized list of findings with severity levels and actionable fixes. Use this skill whenever the user wants code reviewed, asks for feedback on a file or diff, wants a second opinion on an implementation, or says things like "review this", "look over this code", "what's wrong with this", "any issues here", or "PR review". Also trigger when the user shares code and asks if it looks right, even if they don't use the word "review". Do not trigger for product documents, PRDs, specs, or design artifacts — use `design-critique` for those.
+description: Review code for bugs, correctness, security issues, and maintainability. Produce a prioritized list of findings with severity levels and actionable fixes. Use this skill whenever the user wants code reviewed, asks for feedback on a file or diff, wants a second opinion on an implementation, or says things like "review this", "look over this code", "what's wrong with this", "any issues here", or "PR review". Also trigger when the user shares code and asks if it looks right, even if they don't use the word "review". ALSO trigger automatically after you finish implementing or significantly modifying code — run the review without being asked, fix any Critical or Major findings, then offer another pass. Do not trigger for product documents, PRDs, specs, or design artifacts — use `design-critique` for those.
 ---
 
 # Code Review Skill
