@@ -91,6 +91,14 @@ After the loop completes, report:
 - **Remaining issues** — anything Minor/Nit, or Critical/Major that couldn't be auto-fixed (e.g. requires a product decision or architectural change the implementer needs to make)
 - Then ask: *"Want me to go another round on the remaining items, or is this good to ship?"*
 
+## Standards compliance
+
+This skill covers correctness, security, and maintainability — not project-specific conventions. If a `STANDARDS.md` exists in the project root, note it at the end of the review:
+
+> "I also found a `STANDARDS.md` — run `/standards-check` to verify compliance with your project standards."
+
+Don't try to enforce STANDARDS.md rules yourself during a code review. That's `standards-check`'s job, and mixing the two makes both outputs harder to act on.
+
 ## Tone
 
 Be direct, not harsh. The goal is to help, not to demonstrate thoroughness. A three-item review that catches the real problems is better than a fifteen-item review padded with Nits. If the code is good, say so.
