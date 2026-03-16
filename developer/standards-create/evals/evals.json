@@ -1,0 +1,89 @@
+{
+  "skill_name": "standards-create",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "hey i'm interested in setting up some coding standards for this repository — we're a small team of 3 devs and things are starting to get inconsistent. can you help me put together a STANDARDS.md?",
+      "expected_output": "A STANDARDS.md file written to the project root that is grounded in the actual codebase, addresses specific inconsistencies, covers naming and async patterns, includes rationale for rules.",
+      "files": ["iteration-1/fixtures/node-express/"],
+      "assertions": [
+        {
+          "id": "standards_md_written",
+          "description": "STANDARDS.md file exists in outputs"
+        },
+        {
+          "id": "covers_async_pattern",
+          "description": "Document addresses the async/await vs .then() inconsistency — the codebase mixes both styles"
+        },
+        {
+          "id": "covers_naming_conventions",
+          "description": "Document addresses the mixed function/method naming (camelCase getAllUsers vs snake_case update_user vs PascalCase DeleteUser)"
+        },
+        {
+          "id": "grounded_not_generic",
+          "description": "Document is grounded in the actual codebase — references Express, pg, or JWT specifically"
+        },
+        {
+          "id": "includes_rationale",
+          "description": "At least some rules include a 'Why' or brief rationale explaining the reason for the rule"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "we just started this project 2 months ago and i want to lock in standards before we bring on more engineers. can you look at what we have and help write up a STANDARDS.md? our main concern is keeping the component and file naming consistent",
+      "expected_output": "A STANDARDS.md written to disk that identifies naming inconsistencies in the codebase, establishes clear naming conventions, covers React-specific patterns.",
+      "files": ["iteration-1/fixtures/react-app/"],
+      "assertions": [
+        {
+          "id": "standards_md_written",
+          "description": "STANDARDS.md file exists in outputs"
+        },
+        {
+          "id": "addresses_file_naming",
+          "description": "Directly resolves the snake_case vs PascalCase file naming inconsistency (transaction_card.jsx and settings.jsx vs Navbar.jsx, Button.jsx)"
+        },
+        {
+          "id": "covers_component_patterns",
+          "description": "Addresses component structure — export style (default vs named), component naming conventions"
+        },
+        {
+          "id": "acknowledges_zustand",
+          "description": "Mentions Zustand (the state management library in use)"
+        },
+        {
+          "id": "scoped_appropriately",
+          "description": "Document is focused and actionable — not an exhaustive 50-rule manifesto"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "i want to document our coding conventions. we already have ruff configured but there's no written standards doc anywhere. what conventions should we be following?",
+      "expected_output": "A STANDARDS.md written to disk that notes ruff is authoritative, addresses naming inconsistencies not caught by ruff, establishes testing expectations.",
+      "files": ["iteration-1/fixtures/python-flask/"],
+      "assertions": [
+        {
+          "id": "standards_md_written",
+          "description": "STANDARDS.md file exists in outputs"
+        },
+        {
+          "id": "defers_to_ruff",
+          "description": "Document explicitly acknowledges ruff handles style/formatting — doesn't duplicate its rules"
+        },
+        {
+          "id": "addresses_file_naming",
+          "description": "Flags or resolves Client.py (PascalCase) vs invoice.py (lowercase) filename inconsistency"
+        },
+        {
+          "id": "addresses_route_function_naming",
+          "description": "Flags or resolves CreateInvoice (PascalCase) vs get_invoices/update_invoice (snake_case) route function naming"
+        },
+        {
+          "id": "includes_testing_expectation",
+          "description": "Establishes a testing expectation even though no tests exist yet"
+        }
+      ]
+    }
+  ]
+}

@@ -34,6 +34,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `browser-extension-scaffold` | Generates a working Manifest V3 browser extension scaffold (manifest, popup HTML/JS/CSS) and writes files to the project |
 | `code-review` | Reviews code with severity-tiered findings (Critical / Major / Minor / Nit) and specific, actionable fixes |
 | `standards-check` | Checks code against a project `STANDARDS.md` — severity-tiered findings, auto-fixes in-file violations, flags structural changes for the user |
+| `standards-create` | Authors a `STANDARDS.md` from scratch — explores the codebase, surfaces existing conventions, interviews the user, and produces a grounded, checkable standards doc |
 | `test-writer` | Reads a JS file and writes a Vitest test suite alongside it — covers pure functions, state transitions, and DOM interactions, with jsdom and chrome API setup handled automatically |
 
 ### Cross-cutting
@@ -170,7 +171,9 @@ claude-skills/
 │   │   └── SKILL.md
 │   ├── test-writer/
 │   │   └── SKILL.md
-│   └── standards-check/
+│   ├── standards-check/
+│   │   └── SKILL.md
+│   └── standards-create/
 │       └── SKILL.md
 └── product-manager/
     ├── design-critique/
