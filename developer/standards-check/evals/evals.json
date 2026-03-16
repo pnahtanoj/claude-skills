@@ -1,0 +1,51 @@
+{
+  "skill_name": "standards-check",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "check standards on userProfile.js",
+      "expected_output": "Findings list identifying: file naming violation (camelCase filename instead of kebab-case), missing try/catch on fetchUserProfile and updateProfile, missing JSDoc on all exported functions, empty catch block in deleteUser, wrong import order (local before third-party). Violations grouped by severity.",
+      "files": [
+        "evals/files/test1/STANDARDS.md",
+        "evals/files/test1/userProfile.js"
+      ],
+      "expectations": [
+        "Reports a violation for the filename userProfile.js (not kebab-case)",
+        "Reports missing try/catch on fetchUserProfile",
+        "Reports the empty catch block in deleteUser as a violation",
+        "Reports missing JSDoc comments on exported functions",
+        "Findings are grouped by severity tier"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "does date-utils.js follow our standards?",
+      "expected_output": "No violations found — date-utils.js fully complies with the standards. File uses kebab-case, constants use SCREAMING_SNAKE_CASE, async function has try/catch with error logging, and a default export groups the functions.",
+      "files": [
+        "evals/files/test2/STANDARDS.md",
+        "evals/files/test2/date-utils.js"
+      ],
+      "expectations": [
+        "Reports no violations (or only nit-level items)",
+        "Does not fabricate violations that aren't in the standards",
+        "Explicitly confirms the file is compliant"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "run a standards check on routes/orders.js",
+      "expected_output": "Multiple Critical/Major violations: DB queries in route handler (should be in repositories), business logic in route handler (should be in services), route handler has try/catch (should bubble up), raw string thrown instead of Error object, response format doesn't match required shape. Offers to fix after presenting findings.",
+      "files": [
+        "evals/files/test3/STANDARDS.md",
+        "evals/files/test3/routes/orders.js"
+      ],
+      "expectations": [
+        "Flags DB queries in the route handler as a violation of the architecture standard",
+        "Flags the try/catch in the route handler (routes must not have try/catch)",
+        "Flags the raw string throw as a violation",
+        "Flags the response format not matching { success, data, error }",
+        "Offers to fix the violations after presenting findings"
+      ]
+    }
+  ]
+}

@@ -33,6 +33,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `stack-decision` | Same as above but focused on technology/library/framework choices — adds ecosystem health, escape hatch, and maintenance burden lenses |
 | `browser-extension-scaffold` | Generates a working Manifest V3 browser extension scaffold (manifest, popup HTML/JS/CSS) and writes files to the project |
 | `code-review` | Reviews code with severity-tiered findings (Critical / Major / Minor / Nit) and specific, actionable fixes |
+| `standards-check` | Checks code against a project `STANDARDS.md` — severity-tiered findings, auto-fixes in-file violations, flags structural changes for the user |
 | `test-writer` | Reads a JS file and writes a Vitest test suite alongside it — covers pure functions, state transitions, and DOM interactions, with jsdom and chrome API setup handled automatically |
 
 ### Cross-cutting
@@ -167,7 +168,9 @@ claude-skills/
 │   │       └── js-gotchas.md
 │   ├── stack-decision/
 │   │   └── SKILL.md
-│   └── test-writer/
+│   ├── test-writer/
+│   │   └── SKILL.md
+│   └── standards-check/
 │       └── SKILL.md
 └── product-manager/
     ├── design-critique/
