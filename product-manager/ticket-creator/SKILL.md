@@ -73,6 +73,7 @@ Before writing, resolve where the ticket file should live:
 1. **Infer a task/feature grouping** from available context, in priority order:
    - Current git branch name (strip prefixes like `feature/`, `fix/`, `chore/`)
    - A PRD or requirements doc open or referenced in the session
+   - **Existing subdirectories under `tickets/`** — if one or more subdirectories already contain tickets, and the current work clearly belongs to one of them, use that subdirectory. This prevents tickets from landing at the top level when a grouping already exists.
    - The session topic if it clearly maps to a single feature
    - If none of the above apply, use no subdirectory (flat in `tickets/`)
 
@@ -153,4 +154,5 @@ Failure patterns to avoid. Update this section when new ones are observed.
 - **Use subagents for ticket splitting.** If a feature is complex enough to warrant 3+ tickets, spawn parallel subagents to draft each ticket simultaneously, then review for dependency ordering and conflicts before presenting.
 - **Always write the ticket to a local file.** Do not only output to the conversation. The file is the artifact; the conversation output is a summary.
 - **Never hardcode a subdirectory.** Infer the grouping from branch/PRD/context — don't ask the user for a folder name unless there is truly no signal.
+- **Always check `tickets/` for existing subdirectories before falling back to flat.** If a subdirectory already contains tickets and the new work belongs there, use it. Don't drop tickets at the top level when a grouping already exists.
 - **MCP posting is not the primary path.** Do not offer to post to GitHub/Linear/Jira unless explicitly asked.
