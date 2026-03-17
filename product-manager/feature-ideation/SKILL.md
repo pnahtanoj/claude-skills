@@ -55,7 +55,7 @@ predetermined framework.
 
 **For each idea:**
 - A clear, descriptive name (not vague like "improve onboarding")
-- A one-liner rationale: why this matters to the user or the product
+- A rationale (1-3 sentences): why this matters to the user or the product, and what problem it solves or opportunity it opens up
 - A tag: **Quick Win** or **Big Bet**
 
 **Quick Win**: Relatively contained scope, delivers value fast, low risk.
@@ -74,10 +74,10 @@ Use this structure:
 ## [Theme Name]
 
 **[Idea Name]** · Quick Win / Big Bet
-> [One-liner rationale]
+> [1-3 sentence rationale: what problem it solves or opportunity it opens, and why it matters to the user]
 
 **[Idea Name]** · Quick Win / Big Bet
-> [One-liner rationale]
+> [1-3 sentence rationale]
 ```
 
 Close with a brief offer:
