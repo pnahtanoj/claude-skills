@@ -1,0 +1,29 @@
+{
+  "skill_name": "feature-ideation",
+  "evals": [
+    {
+      "id": 0,
+      "name": "habit-tracker-cold-start",
+      "prompt": "I'm building a habit tracking app for remote workers. Give me some feature ideas.",
+      "expected_output": "Ideas grouped by theme (3-5 themes), each with a one-liner rationale and a Quick Win / Big Bet tag. 10-20 ideas total.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 1,
+      "name": "invoicing-client-features",
+      "prompt": "We have a basic invoicing tool for freelancers — it handles creating invoices and tracking payment status. What features are we missing around client relationships?",
+      "expected_output": "Ideas grouped by theme, focused on client relationship features, each with rationale and Quick Win / Big Bet tag.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "name": "meeting-cost-what-else",
+      "prompt": "We've built the core of a meeting cost calculator — it tracks time in meetings and shows you the dollar cost. What else could we add to make it more useful?",
+      "expected_output": "Ideas grouped by theme, building on the meeting cost concept, each with rationale and Quick Win / Big Bet tag.",
+      "files": [],
+      "assertions": []
+    }
+  ]
+}
