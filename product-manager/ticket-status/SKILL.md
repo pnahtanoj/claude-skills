@@ -106,7 +106,11 @@ If the user says yes (or names a ticket):
    check compliance after the fact.
 3. Then begin implementation.
 
-When work on a ticket is complete, update its frontmatter `status` to `done`.
+When work on a ticket is complete, before updating its frontmatter `status`
+to `done`: check the ticket file for a `🧪 Testing Checkpoint` section. If
+one exists, surface it to the user and ask them to confirm the checkpoint has
+been completed before marking the ticket done. Do not update the status until
+the user confirms.
 
 ---
 
