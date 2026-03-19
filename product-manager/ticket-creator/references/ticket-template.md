@@ -69,6 +69,14 @@ over-prescribe — leave room for the developer to make decisions.)*
 
 ---
 
+**🧪 Testing Checkpoint**
+*(Optional — include only when this ticket completes a meaningful vertical
+slice worth a human end-to-end test. The signal: completing this ticket means
+two or more prior tickets can be validated together for the first time.
+Describe what to test and what a passing run looks like.)*
+
+---
+
 **Out of Scope**
 Explicitly list things this ticket does NOT cover. Think about what a developer
 might reasonably assume is included — then rule out anything that isn't.
