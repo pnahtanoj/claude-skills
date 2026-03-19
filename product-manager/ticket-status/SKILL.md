@@ -97,9 +97,14 @@ After outputting the board, if there are available tickets, ask:
 > "Want me to claim one of the available tickets and start work? I'll update
 > its status to `in-progress` before beginning."
 
-If the user says yes (or names a ticket), update the `status` field in the
-ticket's frontmatter from `todo` to `in-progress` before proceeding. This
-prevents other agents from picking up the same ticket.
+If the user says yes (or names a ticket):
+
+1. Update the `status` field in the ticket's frontmatter from `todo` to
+   `in-progress`. This prevents other agents from picking up the same ticket.
+2. Check for a `STANDARDS.md` in the project root. If one exists, read it in
+   full before writing any code. Apply those standards throughout — do not
+   check compliance after the fact.
+3. Then begin implementation.
 
 When work on a ticket is complete, update its frontmatter `status` to `done`.
 
