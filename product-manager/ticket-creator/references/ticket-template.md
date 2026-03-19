@@ -74,7 +74,12 @@ over-prescribe — leave room for the developer to make decisions.)*
 use the product for the first time, a major workflow phase becomes testable
 end-to-end, or the product crosses a threshold where real quality judgment
 is possible. Convergence of dependencies alone is not enough. When in doubt,
-omit it. Describe what to test and what a passing run looks like.)*
+omit it.*
+
+*Format: one or two sentences of prose describing what's now testable and
+why it matters, followed by a checklist of 3–5 key flows to walk through.
+Keep the checklist short — these are judgment calls, not exhaustive acceptance
+criteria.)*
 
 ---
 
