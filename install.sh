@@ -4,9 +4,12 @@ set -e
 SKILLS_DIR="$HOME/.claude/skills"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+RULES_DIR="$HOME/.claude/rules"
+
 echo "Installing claude-skills to $SKILLS_DIR..."
 
 mkdir -p "$SKILLS_DIR"
+mkdir -p "$RULES_DIR"
 
 # Skills are installed flat into ~/.claude/skills/<skill-name>/
 # regardless of the category structure in this repo.
@@ -28,8 +31,12 @@ cp -r "$SCRIPT_DIR/product-manager/feature-prioritization" "$SKILLS_DIR/"
 cp -r "$SCRIPT_DIR/product-manager/requirements-doc"       "$SKILLS_DIR/"
 cp -r "$SCRIPT_DIR/product-manager/ticket-creator"         "$SKILLS_DIR/"
 cp -r "$SCRIPT_DIR/product-manager/ticket-review"          "$SKILLS_DIR/"
+cp -r "$SCRIPT_DIR/product-manager/ticket-status"         "$SKILLS_DIR/"
 cp -r "$SCRIPT_DIR/product-manager/researcher"             "$SKILLS_DIR/"
 cp -r "$SCRIPT_DIR/product-manager/user-story-flow"        "$SKILLS_DIR/"
+
+cp "$SCRIPT_DIR/CLAUDE_SHARED.md" "$RULES_DIR/CLAUDE_SHARED.md"
+cp "$SCRIPT_DIR/CODER_RULES.md"  "$RULES_DIR/CODER_RULES.md"
 
 echo "Done. Skills installed to $SKILLS_DIR:"
 echo ""
@@ -48,9 +55,12 @@ echo "  feature-ideation"
 echo "  feature-prioritization"
 echo "  requirements-doc"
 echo "  ticket-creator"
-echo "  ticket-review"
+echo "  ticket-review
+  ticket-status"
 echo "  researcher"
 echo "  user-story-flow"
+echo ""
+echo "Shared rules installed to $RULES_DIR/CLAUDE_SHARED.md and $RULES_DIR/CODER_RULES.md"
 echo ""
 echo "Skills are active in all Claude Code sessions."
 echo "See README.md for customization instructions."

@@ -25,6 +25,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `feature-prioritization` | Stack-ranks features against explicit criteria (impact, fit, effort, confidence, risk) with a visible recommendation |
 | `ticket-creator` | Transforms rough ideas into complete engineering tickets with user story, acceptance criteria, test scenarios, and out-of-scope bounds |
 | `ticket-review` | Audits existing tickets in `tickets/` for gaps, vague criteria, and missing scope — fixes them in place and reports what changed |
+| `ticket-status` | Scans `tickets/` and outputs a live board view (done / in-progress / available / blocked) derived from YAML frontmatter — no memory, always accurate |
 
 ### Developer
 
@@ -192,6 +193,8 @@ claude-skills/
     ├── researcher/
     │   └── SKILL.md
     ├── ticket-review/
+    │   └── SKILL.md
+    ├── ticket-status/
     │   └── SKILL.md
     └── user-story-flow/
         ├── SKILL.md

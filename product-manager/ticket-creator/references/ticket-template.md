@@ -4,6 +4,14 @@
 
 ---
 
+```yaml
+---
+id: NNNN
+status: todo
+depends_on: []
+---
+```
+
 ### [Ticket Title]
 *Short, imperative, specific. E.g. "Add email verification step to signup flow"*
 
