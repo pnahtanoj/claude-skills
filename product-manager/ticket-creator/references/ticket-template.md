@@ -70,10 +70,11 @@ over-prescribe — leave room for the developer to make decisions.)*
 ---
 
 **🧪 Testing Checkpoint**
-*(Optional — include only when this ticket completes a meaningful vertical
-slice worth a human end-to-end test. The signal: completing this ticket means
-two or more prior tickets can be validated together for the first time.
-Describe what to test and what a passing run looks like.)*
+*(Optional — include only at genuine product milestones: a new persona can
+use the product for the first time, a major workflow phase becomes testable
+end-to-end, or the product crosses a threshold where real quality judgment
+is possible. Convergence of dependencies alone is not enough. When in doubt,
+omit it. Describe what to test and what a passing run looks like.)*
 
 ---
 
