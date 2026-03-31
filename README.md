@@ -26,6 +26,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `ticket-creator` | Transforms rough ideas into complete engineering tickets with user story, acceptance criteria, test scenarios, and out-of-scope bounds |
 | `ticket-review` | Audits existing tickets in `tickets/` for gaps, vague criteria, and missing scope — fixes them in place and reports what changed |
 | `ticket-status` | Scans `tickets/` and outputs a live board view (done / in-progress / available / blocked) derived from YAML frontmatter — no memory, always accurate |
+| `discovery-doc` | Creates and maintains a living discovery document — structures findings, tracks open questions, synthesizes stakeholder input during early project investigation |
 
 ### Developer
 
@@ -37,6 +38,9 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `code-review` | Reviews code with severity-tiered findings (Critical / Major / Minor / Nit) and specific, actionable fixes |
 | `standards-check` | Checks code against a project `STANDARDS.md` — severity-tiered findings, auto-fixes in-file violations, flags structural changes for the user |
 | `standards-create` | Authors a `STANDARDS.md` from scratch — explores the codebase, surfaces existing conventions, interviews the user, and produces a grounded, checkable standards doc |
+| `technical-spike` | Structures and runs a timeboxed technical spike — define a hypothesis, execute the investigation, and produce a findings document with a clear recommendation |
+| `data-modeling` | Designs and documents data models, schemas, entity relationships, source-to-target mappings, and data layer architecture (medallion, star schema, etc.) |
+| `infrastructure-scaffold` | Generates infrastructure-as-code boilerplate (Terraform, Bicep, CDK) for cloud resources — opinionated, secure defaults, ready to plan and apply |
 | `test-writer` | Reads a JS file and writes a Vitest test suite alongside it — covers pure functions, state transitions, and DOM interactions, with jsdom and chrome API setup handled automatically |
 
 ### Cross-cutting
@@ -45,6 +49,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 |---|---|
 | `context-handoff` | Captures session state into a structured handoff — either a human-readable session summary or a CLAUDE.md block for Claude Code |
 | `skills-repo` | Manages this repo — add, update, or remove skills and keeps the skill directory, `install.sh`, and README table in sync |
+| `skill-creator` | Creates new skills, runs eval loops with test prompts and benchmarking, iterates based on feedback, and optimizes skill descriptions for triggering accuracy |
 
 ---
 
@@ -160,6 +165,20 @@ claude-skills/
 │       ├── handoff-formats.md
 │       ├── mcp-usage.md
 │       └── examples.md
+├── skill-creator/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   ├── analyzer.md
+│   │   ├── comparator.md
+│   │   └── grader.md
+│   ├── assets/
+│   │   └── eval_review.html
+│   ├── eval-viewer/
+│   │   ├── generate_review.py
+│   │   └── viewer.html
+│   ├── references/
+│   │   └── schemas.md
+│   └── scripts/
 ├── developer/
 │   ├── architecture-decision/
 │   │   └── SKILL.md
@@ -175,7 +194,13 @@ claude-skills/
 │   │   └── SKILL.md
 │   ├── standards-check/
 │   │   └── SKILL.md
-│   └── standards-create/
+│   ├── standards-create/
+│   │   └── SKILL.md
+│   ├── technical-spike/
+│   │   └── SKILL.md
+│   ├── data-modeling/
+│   │   └── SKILL.md
+│   └── infrastructure-scaffold/
 │       └── SKILL.md
 └── product-manager/
     ├── design-critique/
@@ -196,9 +221,11 @@ claude-skills/
     │   └── SKILL.md
     ├── ticket-status/
     │   └── SKILL.md
-    └── user-story-flow/
-        ├── SKILL.md
-        └── references/
+    ├── user-story-flow/
+    │   ├── SKILL.md
+    │   └── references/
+    └── discovery-doc/
+        └── SKILL.md
 ```
 
 Each skill is a directory with a `SKILL.md` (the main prompt) and an optional `references/` folder for templates, examples, and tooling notes.
