@@ -19,6 +19,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | Skill | What it does |
 |---|---|
 | `researcher` | Investigates a product space via web research and produces a structured, dated research brief (competitive landscape, user pain points, pricing, gaps) in `research/` |
+| `research-review` | Audits a research document (vendor eval, competitive analysis, research brief) for factual accuracy, cross-references against project context, verifies claims via web research, and produces a findings report with recommended edits |
 | `user-story-flow` | Turns a product idea into structured user stories, a numbered flow (happy path + alternates + errors), and testable acceptance criteria |
 | `requirements-doc` | Consolidates stories, critique findings, and decisions into a lean PRD |
 | `design-critique` | Reviews designs across 5 dimensions (UX, visual, feasibility, scope, goal consistency) and returns a prioritized, severity-rated findings list |
@@ -216,6 +217,8 @@ claude-skills/
     │   ├── SKILL.md
     │   └── references/
     ├── researcher/
+    │   └── SKILL.md
+    ├── research-review/
     │   └── SKILL.md
     ├── ticket-review/
     │   └── SKILL.md
