@@ -186,27 +186,23 @@ matter.
 
 ---
 
-## Step 4: Run available linters
+## Step 4: Note useful linters (don't hunt for them)
 
-If the relevant tooling is installed, run automated checks to supplement your
-review:
+Do NOT spend time checking whether linting tools are installed. Instead,
+at the end of your review, mention which tools would add value for this
+codebase:
 
-| Tool | Command | What it catches |
-|------|---------|-----------------|
-| `terraform` | `terraform fmt -check -recursive && terraform validate` | Formatting and syntax |
-| `tflint` | `tflint --recursive` | Provider-specific issues, deprecated syntax |
-| `checkov` | `checkov -d .` | Security and compliance policy violations |
-| `trivy` | `trivy config .` | Misconfigurations across IaC and Docker |
-| `hadolint` | `hadolint Dockerfile` | Dockerfile best practice violations |
-| `actionlint` | `actionlint` | GitHub Actions workflow problems |
+| Tool | What it catches |
+|------|-----------------|
+| `tflint` | Provider-specific Terraform issues, deprecated syntax |
+| `checkov` / `trivy` | Security and compliance policy violations across IaC |
+| `hadolint` | Dockerfile best practice violations |
+| `actionlint` | GitHub Actions workflow problems |
 
-Check if each tool is available before running it (e.g., `which tflint`).
-Don't ask the user to install tools — just use what's there and note what
-additional tools could catch more issues.
-
-Incorporate linter findings into your review rather than presenting them
-separately. If a linter catches something you already found, it confirms the
-finding. If it catches something new, add it.
+If you happen to notice a linter config file in the project (`.tflint.hcl`,
+`.hadolint.yaml`, `.checkov.yaml`), that's a signal the tool is available —
+go ahead and run it. Otherwise, just recommend the most relevant 1-2 tools
+in the summary and move on.
 
 ---
 
