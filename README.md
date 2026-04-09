@@ -43,6 +43,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `data-modeling` | Designs and documents data models, schemas, entity relationships, source-to-target mappings, and data layer architecture (medallion, star schema, etc.) |
 | `infrastructure-scaffold` | Generates infrastructure-as-code boilerplate (Terraform, Bicep, CDK) for cloud resources — opinionated, secure defaults, ready to plan and apply |
 | `test-writer` | Reads a JS file and writes a Vitest test suite alongside it — covers pure functions, state transitions, and DOM interactions, with jsdom and chrome API setup handled automatically |
+| `mcp-manager` | Manages MCP server configurations — adds entities to DAB configs with schema validation, scaffolds new DAB or general MCP servers, and debugs startup failures with a known-issues playbook |
 
 ### Cross-cutting
 
@@ -201,8 +202,12 @@ claude-skills/
 │   │   └── SKILL.md
 │   ├── data-modeling/
 │   │   └── SKILL.md
-│   └── infrastructure-scaffold/
-│       └── SKILL.md
+│   ├── infrastructure-scaffold/
+│   │   └── SKILL.md
+│   └── mcp-manager/
+│       ├── SKILL.md
+│       └── references/
+│           └── dab-wrapper-template.sh
 └── product-manager/
     ├── design-critique/
     │   ├── SKILL.md
