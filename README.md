@@ -44,6 +44,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `infrastructure-scaffold` | Generates infrastructure-as-code boilerplate (Terraform, Bicep, CDK) for cloud resources — opinionated, secure defaults, ready to plan and apply |
 | `test-writer` | Reads a JS file and writes a Vitest test suite alongside it — covers pure functions, state transitions, and DOM interactions, with jsdom and chrome API setup handled automatically |
 | `mcp-manager` | Manages MCP server configurations — adds entities to DAB configs with schema validation, scaffolds new DAB or general MCP servers, and debugs startup failures with a known-issues playbook |
+| `dbt-modeler` | Generates dbt models (staging + gold), sources.yml, schema.yml with tests and docs — reads existing project conventions and schema references to produce working SQL files |
 
 ### Cross-cutting
 
@@ -204,10 +205,12 @@ claude-skills/
 │   │   └── SKILL.md
 │   ├── infrastructure-scaffold/
 │   │   └── SKILL.md
-│   └── mcp-manager/
-│       ├── SKILL.md
-│       └── references/
-│           └── dab-wrapper-template.sh
+│   ├── mcp-manager/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── dab-wrapper-template.sh
+│   └── dbt-modeler/
+│       └── SKILL.md
 └── product-manager/
     ├── design-critique/
     │   ├── SKILL.md
