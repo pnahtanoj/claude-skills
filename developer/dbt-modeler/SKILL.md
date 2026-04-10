@@ -23,7 +23,17 @@ Your job is to generate working dbt models — SQL files, source definitions, sc
    - The user's description of the table
    - Existing models that already reference the same source
 
-3. **Match the project's conventions.** If the project already has models with a specific pattern (CTE structure, naming, date handling), follow that pattern exactly. Consistency within a project matters more than following the dbt standard naming to the letter. If the project uses `stg_orders.sql` instead of `stg_warehouse__orders.sql`, keep using that format.
+3. **Compare project conventions against dbt best practices.** Read the existing models and check for deviations from the standards described in this skill. Common deviations include:
+   - Staging models that join multiple source tables (violates 1:1 rule)
+   - Missing intermediate layer (joins happening in staging or marts)
+   - Naming without source prefix or double underscore (`stg_orders` vs `stg_warehouse__orders`)
+   - No materialization config (everything defaulting to views or tables)
+   - Missing source freshness config
+   - YAML files named `schema.yml` instead of `_[dir]__models.yml`
+
+   **When you find deviations, surface them plainly before writing any code.** Tell the user what the project does, what the dbt standard recommends, and why it matters. Then ask which pattern they want you to follow for the new model. Don't silently pick one.
+
+   Example: *"I notice stg_orders.sql joins ord and ord_line — dbt best practice says staging should be 1:1 with source tables, with joins in intermediate models. This matters because it keeps staging models simple and reusable. Want me to follow the existing pattern for consistency, or follow the dbt standard? If you want the standard, I can also refactor the existing models to match."*
 
 ## The three-layer architecture
 
@@ -50,7 +60,14 @@ dbt best practice defines three model layers. Understand which layer you're writ
 - **Design:** Wide and denormalized. Pack in all relevant dimensions — storage is cheap, rejoins are expensive.
 - **Naming:** Plain entity names (`orders`, `customers`) or project convention (`gold_open_orders`, `fct_shipments`, `dim_customers`).
 
-**Note on existing projects:** Many projects use a two-layer pattern (staging → gold/marts) without intermediate, or join in staging. If the project already does this, follow the established pattern rather than refactoring to three layers mid-stream. Mention the dbt recommendation if asked, but don't force a restructure.
+### When existing projects deviate
+
+Many projects use a two-layer pattern (staging → gold/marts) without intermediate, or join in staging. When you encounter this:
+
+1. **Name the deviation** — tell the user what you found and what the dbt standard says.
+2. **Explain the trade-off** — consistency with existing code vs. alignment with best practices.
+3. **Ask the user** — "Follow the existing pattern, or follow the dbt standard?"
+4. **Offer to refactor** — if the user wants the standard, offer to refactor existing models to match. Scope the work: which files would change, what the intermediate models would look like, whether downstream refs need updating. Don't start refactoring without explicit approval.
 
 ## Operations
 
@@ -317,12 +334,18 @@ When asked to validate, check:
 1. **Source references exist.** Every `{{ source('x', 'y') }}` has a matching entry in sources YAML.
 2. **Ref targets exist.** Every `{{ ref('model_name') }}` has a matching `.sql` file.
 3. **Column names match schema.** If MCP/SchemaColumns is available, query the source and compare column names used in the model against actual columns.
-4. **Layer discipline.** No `source()` calls in mart/gold models. No joins in staging (unless the project's established pattern allows it).
+4. **Layer discipline.** No `source()` calls in mart/gold models. Staging models should be 1:1 with sources (no joins).
 5. **Tests cover keys.** Primary/composite key columns have uniqueness tests. Required columns have `not_null`.
 6. **Source fanout.** Each source is referenced by at most one staging model.
 7. **Model fanout.** Flag models with >3 direct downstream dependents — may indicate logic should be centralized.
+8. **Naming conventions.** Compare file names, YAML names, and column names against dbt standards.
+9. **Materialization.** Check that staging uses views, marts use tables/incremental, and intermediate uses ephemeral/views.
 
-Report findings and offer to fix them.
+Report findings in two categories:
+- **Errors** — things that will break (missing refs, wrong column names)
+- **Deviations from dbt standards** — things that work but don't follow best practices
+
+For deviations, explain what the standard is and why it matters, then offer to refactor. Scope the refactor: list which files would change, what new files would be created (e.g., intermediate models to replace staging joins), and whether downstream `ref()` calls need updating. Don't start refactoring without the user's go-ahead.
 
 ## SQL dialect awareness
 
@@ -340,7 +363,7 @@ If no `profiles.yml` exists, ask the user what database they're targeting. The w
 
 ## Tips
 
-- **Read before writing.** If the project has existing models, match their patterns. Consistency within a project outweighs adherence to the dbt standard.
+- **Read before writing, then surface what you find.** If the project deviates from dbt standards, say so plainly — don't silently copy non-standard patterns. Let the user choose between consistency and correctness.
 - **One model, one grain.** The model-level description must answer "what does one row represent?" If you can't say it in one sentence, the model needs work.
 - **Staging is mechanical, marts are business.** Staging renames and casts. Business logic (filters, aggregations, derived metrics) belongs downstream.
 - **Don't skip intermediate when you need it.** If a mart has 5+ joins, break the complex parts into intermediate models. But don't create intermediate models for simple pass-throughs.
