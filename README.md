@@ -210,7 +210,9 @@ claude-skills/
 │   │   └── references/
 │   │       └── dab-wrapper-template.sh
 │   └── dbt-modeler/
-│       └── SKILL.md
+│       ├── SKILL.md
+│       └── references/
+│           └── best-practices-sources.md
 └── product-manager/
     ├── design-critique/
     │   ├── SKILL.md
