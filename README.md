@@ -45,6 +45,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `test-writer` | Reads a JS file and writes a Vitest test suite alongside it — covers pure functions, state transitions, and DOM interactions, with jsdom and chrome API setup handled automatically |
 | `mcp-manager` | Manages MCP server configurations — adds entities to DAB configs with schema validation, scaffolds new DAB or general MCP servers, and debugs startup failures with a known-issues playbook |
 | `dbt-modeler` | Generates dbt models (staging + gold), sources.yml, schema.yml with tests and docs — reads existing project conventions and schema references to produce working SQL files |
+| `docs-audit` | Audits a project's documentation tree for navigation gaps, staleness, duplication, broken cross-references, and structural problems — produces a findings report with a proposed navigation index and remediation roadmap |
 
 ### Cross-cutting
 
@@ -209,10 +210,12 @@ claude-skills/
 │   │   ├── SKILL.md
 │   │   └── references/
 │   │       └── dab-wrapper-template.sh
-│   └── dbt-modeler/
-│       ├── SKILL.md
-│       └── references/
-│           └── best-practices-sources.md
+│   ├── dbt-modeler/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── best-practices-sources.md
+│   └── docs-audit/
+│       └── SKILL.md
 └── product-manager/
     ├── design-critique/
     │   ├── SKILL.md

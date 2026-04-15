@@ -1,0 +1,57 @@
+{
+  "skill_name": "docs-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "The docs in this project are getting unwieldy — there's like 60 markdown files scattered across a bunch of subdirectories and I can never find what I'm looking for. Can you audit the documentation and tell me what needs fixing?",
+      "expected_output": "A severity-tiered findings report covering navigation, staleness, cross-file consistency, duplication, cross-references, structure, consistency, and length. Should include a documentation health summary table, a proposed navigation index with clickable markdown links, and a remediation roadmap. Should check for and flag any cross-file factual inconsistencies.",
+      "files": [],
+      "working_directory": "/Users/Jonathan.Price/Documents/Repos/idc-data-platform",
+      "expectations": [
+        "Report includes a documentation inventory with total file count and total line count",
+        "Report uses severity tiers (Critical/Major/Minor/Nit or equivalent graduated scale)",
+        "Report includes a health summary table with quantitative metrics",
+        "Report includes a proposed navigation index with clickable markdown links (not inline code paths or ASCII trees)",
+        "Report includes a remediation roadmap with sequenced, prioritized steps",
+        "Report identifies the missing /docs/README.md or docs-level index as a finding",
+        "Report flags at least one doc over 500 lines that lacks a table of contents",
+        "Report identifies compound problems — issues that are worse in combination",
+        "Report identifies overlap or duplication between docs covering similar topics",
+        "Report checks for and reports on cross-file factual consistency (e.g., whether metrics like site counts or model counts are stated consistently across docs)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review the documentation in this project — is it well organized? Anything I should clean up?",
+      "expected_output": "A proportionate audit for a smaller project (~12 docs). Should be compressed relative to a large-project audit. Should flag adjacent serious issues (like security problems) if found, not just structural doc issues.",
+      "files": [],
+      "working_directory": "/Users/Jonathan.Price/Documents/Repos/toolbox-adapter",
+      "expectations": [
+        "Report includes a documentation inventory with file count",
+        "Report uses severity tiers (Critical/Major/Minor/Nit or equivalent graduated scale)",
+        "Report identifies the broken links in the root README",
+        "Report identifies duplicated API documentation across multiple files",
+        "Report includes a remediation roadmap or prioritized action list",
+        "Report is proportionate — does not manufacture excessive findings for a small project",
+        "Report includes a proposed navigation guide or post-cleanup target state",
+        "Report flags the hardcoded credentials in .claude/settings.local.json as an adjacent finding (even though it's technically outside docs-audit scope)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I need a docs index for this project — the team can't find anything. Can you look at what we have and create a navigation guide?",
+      "expected_output": "A navigation index as the primary deliverable — produced as a standalone file separate from the findings report. Organized by purpose/audience rather than directory structure. Uses clickable markdown links with correct relative paths.",
+      "files": [],
+      "working_directory": "/Users/Jonathan.Price/Documents/Repos/idc-data-platform",
+      "expectations": [
+        "Navigation index is produced as a STANDALONE file (separate from the audit report)",
+        "Navigation index uses clickable markdown links with relative paths (not inline code paths or ASCII trees)",
+        "Navigation index is organized by purpose or audience, not just mirroring the directory structure",
+        "Navigation index groups docs into named categories (e.g. 'Start here', 'Architecture', 'References')",
+        "Navigation index includes a suggested reading order or onboarding path",
+        "Navigation index covers the majority of docs in the project (not just a subset)",
+        "Output also includes a separate audit/findings report that surfaces documentation issues"
+      ]
+    }
+  ]
+}
