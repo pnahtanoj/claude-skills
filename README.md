@@ -46,6 +46,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `mcp-manager` | Manages MCP server configurations — adds entities to DAB configs with schema validation, scaffolds new DAB or general MCP servers, and debugs startup failures with a known-issues playbook |
 | `dbt-modeler` | Generates dbt models (staging + gold), sources.yml, schema.yml with tests and docs — reads existing project conventions and schema references to produce working SQL files |
 | `docs-audit` | Audits a project's documentation tree for navigation gaps, staleness, duplication, broken cross-references, and structural problems — produces a findings report with a proposed navigation index and remediation roadmap |
+| `vendor-comparison` | Produces a weighted, scored comparison of 3+ vendors or tools — with explicit criteria weights, evidence per score cell, unweighted/weighted totals, verified arithmetic, and a recommendation tied to the scoring |
 
 ### Cross-cutting
 
@@ -214,7 +215,9 @@ claude-skills/
 │   │   ├── SKILL.md
 │   │   └── references/
 │   │       └── best-practices-sources.md
-│   └── docs-audit/
+│   ├── docs-audit/
+│   │   └── SKILL.md
+│   └── vendor-comparison/
 │       └── SKILL.md
 └── product-manager/
     ├── design-critique/

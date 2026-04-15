@@ -1,0 +1,63 @@
+{
+  "skill_name": "vendor-comparison",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're evaluating AI-driven freight automation vendors for a mid-market 3PL (19 warehouses, 50+ clients, 3 back-office FTEs doing manual invoice audit and quote entry). Compare Pallet (AI logistics automation platform), HappyRobot (voice AI for carriers), and Raft (document/invoice automation). We need something we can pilot in H2 2026 with modest budget. Specifically worried about: integration with Blue Yonder WMS, mid-market pricing fit, real customer references in 3PL. Build me a proper comparison so I can take this to the CTO.",
+      "expected_output": "A scored vendor comparison saved as a dated markdown file. Must have weighted criteria with rationale, a scorecard with unweighted AND weighted totals, evidence per score cell, per-vendor strengths/weaknesses that match the scoring pattern, a recommendation tied to the math, and arithmetic that is internally consistent between the exec summary and the scorecard.",
+      "files": [],
+      "expectations": [
+        "Output is saved as a dated markdown file (YYYY-MM-DD format in filename)",
+        "Contains a weighted criteria table with rationale for each weight",
+        "Contains a scorecard table comparing all 3 vendors across all criteria",
+        "Each score cell has an evidence-based justification (not just a number)",
+        "Contains per-vendor strengths and weaknesses sections",
+        "Contains a clear recommendation, deferral, or tie with explicit reasoning tied to the scores",
+        "Flags unverified claims or information gaps and recommends reference checks or PoCs",
+        "Shows both unweighted and weighted totals for each vendor",
+        "All weighted totals are arithmetically correct (score × weight summed, weights sum correctly)",
+        "All numeric scores cited in the executive summary, recommendation, or narrative match the scorecard table exactly (no contradictions)",
+        "Per-vendor strengths and weaknesses are consistent with their scorecard positions (e.g., a vendor scored 5/5 on cost is not listed as 'expensive' in weaknesses)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I need to pick a BI tool for our external client portal. Context: we're a 3PL with 50+ client accounts, each needs to see only their own data (hard RLS requirement), some clients have 50+ users. Cost can't scale linearly with client users. Already using Azure Synapse as the warehouse backend. Compare Metabase OSS, Power BI Embedded, Sigma Computing, and Tableau Embedded. The team has no BI admin experience and we need to ship something in ~6 months.",
+      "expected_output": "A scored comparison of 4 BI tools with weighted criteria for multi-tenant embedding, explicit scoring evidence, per-vendor assessment, a recommendation, and verified arithmetic with unweighted totals shown alongside weighted totals.",
+      "files": [],
+      "expectations": [
+        "Output is saved as a dated markdown file",
+        "Contains a weighted criteria table reflecting multi-tenant RLS and per-user licensing constraints",
+        "Contains a scorecard table comparing all 4 vendors",
+        "Each score cell has evidence-based justification",
+        "Contains per-vendor strengths and weaknesses",
+        "Contains a recommendation or deferral with explicit reasoning",
+        "Treats the hard constraint (multi-tenant RLS) appropriately (either disqualifier or heavily weighted)",
+        "Flags information gaps, open questions, or PoC items",
+        "Shows both unweighted and weighted totals for each vendor",
+        "All weighted totals are arithmetically correct",
+        "All numeric scores cited in narrative match the scorecard table exactly",
+        "Per-vendor strengths and weaknesses are consistent with scorecard positions"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Compare Snowflake vs BigQuery vs Databricks SQL for our data warehouse. Current state: small team (1 data engineer), dbt-heavy pipeline, already have Azure tenancy but also have some AWS. Use case is internal analytics + external portal serving 50+ clients with per-tenant RLS. Modest data volume (<1 TB) but could grow. Biggest constraint: team skill match — data engineer has prior Snowflake experience, no BigQuery or Databricks.",
+      "expected_output": "A scored comparison of 3 warehouse options with verified arithmetic, unweighted and weighted totals, and internally consistent numbers between narrative and scorecard.",
+      "files": [],
+      "expectations": [
+        "Output is saved as a dated markdown file",
+        "Contains a weighted criteria table including team skill match",
+        "Contains a scorecard table comparing all 3 vendors",
+        "Each score cell has evidence-based justification",
+        "Contains per-vendor strengths and weaknesses",
+        "Contains a recommendation tied to the scoring",
+        "Addresses the RLS requirement explicitly",
+        "Addresses the dbt ecosystem fit for each option",
+        "Shows both unweighted and weighted totals for each vendor",
+        "All weighted totals are arithmetically correct",
+        "All numeric scores cited in narrative match the scorecard table exactly"
+      ]
+    }
+  ]
+}
