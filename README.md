@@ -55,6 +55,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 | `context-handoff` | Captures session state into a structured handoff — either a human-readable session summary or a CLAUDE.md block for Claude Code |
 | `granola-tool-routing` | Routes Granola MCP calls to the right fidelity tier (Q&A / prep / persistent artifact / contested) — encodes tier rules, a source-reconciliation rule (transcript > raw notes > AI summary), and attribution conventions |
 | `jira-pe-tickets` | Creates Jira issues on the iDC `PE` board with the team's hierarchy semantics (Epic / Task / Subtask), label taxonomy (domain / source-system / activity / wait-state / cross-cutting), labelling rules, and no-future-phase-clutter convention |
+| `meeting-prep` | Drafts the user's sections of a recurring meeting's shared agenda doc — anchored in evidence from the user's actual week (git commits, new docs, Granola transcripts, Jira activity), with last-week's commitments status-checked verbatim against reality. Output is a markdown chat-block + paste-ready draft for the user to review and paste; the skill never writes to the shared doc directly |
 | `skills-repo` | Manages this repo — add, update, or remove skills and keeps the skill directory, `install.sh`, and README table in sync |
 | `skill-creator` | Creates new skills, runs eval loops with test prompts and benchmarking, iterates based on feedback, and optimizes skill descriptions for triggering accuracy |
 
@@ -171,6 +172,13 @@ claude-skills/
 │   └── SKILL.md
 ├── jira-pe-tickets/
 │   └── SKILL.md
+├── meeting-prep/
+│   ├── SKILL.md
+│   └── references/
+│       ├── anti-slop-checklist.md
+│       ├── config-schema.md
+│       ├── evidence-inventory.md
+│       └── output-template.md
 ├── skills-repo/
 │   └── SKILL.md
 │       ├── handoff-formats.md

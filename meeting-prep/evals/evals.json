@@ -1,0 +1,102 @@
+{
+  "skill_name": "meeting-prep",
+  "evals": [
+    {
+      "id": 0,
+      "name": "happy-path-full-prep",
+      "prompt": "I have my weekly L10 leadership meeting tomorrow (Thursday 4/24/2026, recurring with Steve, Alex, Priya, Marco, Linh). Help me draft my section of the agenda. Fixtures with the previous agenda doc, the evidence bundle from this week, and my config are at meeting-prep/evals/fixtures/agenda-doc.md, meeting-prep/evals/fixtures/evidence-bundle.md, and meeting-prep/evals/fixtures/config.json. Read them and draft my sections. I'll paste your output into the SharePoint doc myself — don't try to write to it.",
+      "files": [
+        "meeting-prep/evals/fixtures/agenda-doc.md",
+        "meeting-prep/evals/fixtures/evidence-bundle.md",
+        "meeting-prep/evals/fixtures/config.json"
+      ],
+      "expected_output": "Markdown draft with verbatim-quoted last-week to-dos, anchored statuses, preserved aspirational language, cross-ownership flag on billing-architecture, no banned slop phrases.",
+      "assertions": [
+        "Last-week to-do 'Investigate the billing-ingest deadlock that surfaced in prod 4/14' appears verbatim in the draft (the user committed to those exact words)",
+        "Last-week to-do 'I'd like to look into whether we should standardize on Granola for all 1:1 notes' appears verbatim with the aspirational 'I'd like to' phrasing preserved (must NOT be upgraded to 'will' / 'investigate' / 'standardize')",
+        "Last-week to-do 'Pair with Alex on the session-token rotation ADR — get to a decision this week' appears verbatim",
+        "The billing-ingest deadlock to-do is classified Done with a concrete artifact anchor (commit a1b2c3d, doc research/2026-04-19-billing-ingest-deadlock.md, ticket PE-142, or docs/architecture/billing-ingest.md)",
+        "The session-token rotation to-do is classified Done with reference to ADR-0007 or docs/decisions/0007-session-token-rotation.md",
+        "The Granola standardization to-do is NOT classified Done — only a Jira ticket was created (PE-151) with no work logged, so Slipped or In Progress with explicit weak-anchor framing is correct",
+        "A cross-ownership flag appears for the billing-architecture rock or related item, naming Alex Chen as the owner (the rock-level status belongs to Alex; surfacing it as Jonathan's is the failure mode)",
+        "Marco's Day 30 presentation rock does NOT appear in Jonathan's section as if Jonathan owns it",
+        "Priya's data-platform rock does NOT appear in Jonathan's section as if Jonathan owns it",
+        "None of the banned slop phrases appear: 'comprehensive', 'robust', 'leveraged', 'meticulously', 'successfully delivered', 'spearheaded', 'facilitated discussions', 'thoughtfully', 'alignment session', 'deep dive'",
+        "The draft includes recognizable counterparts to the agenda template's sections (Last Week's To-Dos, Roadmap Rocks, Team Headlines, plus IDS or Proposed new To-Dos)",
+        "Every status claim in the draft cites at least one anchor (commit hash, doc path, ticket key, or meeting date) — no unanchored 'continued work on...' / 'made progress' lines",
+        "The draft does NOT fabricate specifics that aren't in the evidence bundle — no invented meeting durations, attendee counts, or session lengths"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "rocks-section-only",
+      "prompt": "Just the Roadmap Rocks update for my L10 tomorrow please. Fixtures at meeting-prep/evals/fixtures/agenda-doc.md, meeting-prep/evals/fixtures/evidence-bundle.md, and meeting-prep/evals/fixtures/config.json. Don't draft any other section.",
+      "files": [
+        "meeting-prep/evals/fixtures/agenda-doc.md",
+        "meeting-prep/evals/fixtures/evidence-bundle.md",
+        "meeting-prep/evals/fixtures/config.json"
+      ],
+      "expected_output": "Rocks section only. Identity rock gets a real anchored update; billing-architecture rock gets a cross-ownership flag; Marco's and Priya's rocks omitted or flagged as not Jonathan's.",
+      "assertions": [
+        "The identity / session-token rotation rock (Jonathan-owned) has an update anchored to ADR-0007 or docs/decisions/0007-session-token-rotation.md or the 4/22 1:1 with Alex",
+        "The billing-architecture rock either has a cross-ownership flag mentioning Alex Chen, or is omitted because Alex owns the rock-level update",
+        "The Day 30 presentation rock does NOT appear as if Jonathan owns the rock-level update (it's Marco's rock)",
+        "The data-platform rock does NOT appear as if Jonathan owns the rock-level update (it's Priya's rock)",
+        "The output is scoped to Rocks only — no 'Last Week's To-Dos', 'Team Headlines', 'IDS', or 'Proposed new To-Dos' sections appear",
+        "None of the banned slop phrases appear: 'comprehensive', 'robust', 'leveraged', 'meticulously', 'successfully delivered', 'spearheaded', 'facilitated discussions'",
+        "Every status claim cites an anchor (commit, doc path, ticket, or dated conversation)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "todo-reconciliation-only",
+      "prompt": "Reconcile my last-week to-dos for tomorrow's L10. Fixtures at meeting-prep/evals/fixtures/agenda-doc.md, meeting-prep/evals/fixtures/evidence-bundle.md, and meeting-prep/evals/fixtures/config.json. Just the to-do reconciliation — I'll handle the other sections.",
+      "files": [
+        "meeting-prep/evals/fixtures/agenda-doc.md",
+        "meeting-prep/evals/fixtures/evidence-bundle.md",
+        "meeting-prep/evals/fixtures/config.json"
+      ],
+      "expected_output": "Each of Jonathan's three last-week to-dos quoted verbatim and statused with a concrete anchor. Aspirational 'I'd like to' phrasing preserved. Granola standardization not classified Done.",
+      "assertions": [
+        "'Investigate the billing-ingest deadlock that surfaced in prod 4/14' is quoted verbatim",
+        "'I'd like to look into whether we should standardize on Granola for all 1:1 notes' is quoted verbatim, with the 'I'd like to' aspirational phrasing preserved (no upgrade to 'investigate' or 'standardize')",
+        "'Pair with Alex on the session-token rotation ADR — get to a decision this week' is quoted verbatim",
+        "Each of the three to-dos is classified as exactly one of: Done, In Progress, Slipped, or Dropped (no invented intermediate statuses)",
+        "Done classifications cite a specific anchor (commit hash, doc path, ticket key, ADR id, or dated meeting reference)",
+        "The Granola standardization to-do is NOT classified Done — there's no real progress beyond a Jira ticket creation",
+        "The output is scoped to to-do reconciliation only — no Rocks, Headlines, or IDS sections appear",
+        "None of the banned phrases appear: 'substantial progress', 'continued work on', 'various updates', 'several items', 'made good progress'"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "skip-condition-oneoff",
+      "prompt": "Help me prep for my coffee chat with Sarah tomorrow morning at the cafe near the office. Sarah is a former colleague who wants advice about her job search.",
+      "files": [],
+      "expected_output": "Normal one-off conversation prep — topics, questions, possible advice areas. The recurring-meeting workflow should NOT be applied.",
+      "assertions": [
+        "The output does NOT contain headings 'Last Week's To-Dos', 'Roadmap Rocks', or 'IDS candidates'",
+        "The output does NOT attempt last-week reconciliation, evidence-inventory, or cross-ownership checks",
+        "The output addresses the actual ask — career-advice prep for a friend's job search (suggested topics, questions, things to listen for)",
+        "The output does NOT cite or reference the meeting-prep skill's workflow phases or terminology"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "missing-config-phase-0",
+      "prompt": "Help me prep for tomorrow's L10. Fixtures with the previous agenda doc and this week's evidence are at meeting-prep/evals/fixtures/agenda-doc.md and meeting-prep/evals/fixtures/evidence-bundle.md. (No config file — first run for this project.)",
+      "files": [
+        "meeting-prep/evals/fixtures/agenda-doc.md",
+        "meeting-prep/evals/fixtures/evidence-bundle.md"
+      ],
+      "expected_output": "The skill should detect that .claude/meeting-prep.json doesn't exist and prompt the user with the four Phase 0 questions inline (name/role, meeting identifier, agenda doc location, evidence inventory targets). It should NOT silently proceed to drafting based on assumptions. After asking the questions, it should offer to save the answers to .claude/meeting-prep.json. It should not write the config silently.",
+      "assertions": [
+        "The output asks the user for at least three of the four config fields: their name/role, the meeting identifier (title pattern / day / cadence), the agenda doc location, and the evidence inventory targets",
+        "The output explicitly notes that no config file was found (or that this looks like a first run)",
+        "The output offers to save the answers to .claude/meeting-prep.json after the user provides them",
+        "The output does NOT silently fabricate config values and proceed to a full draft as if the user had provided everything",
+        "The output does NOT write a .claude/meeting-prep.json file unilaterally"
+      ]
+    }
+  ]
+}

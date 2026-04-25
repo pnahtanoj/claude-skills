@@ -1,0 +1,35 @@
+{
+  "$schema": "meeting-prep-v1",
+  "user": {
+    "name": "Jonathan Price",
+    "git_author": "Jonathan Price",
+    "granola_email": "jonathan.price@idcintl.com"
+  },
+  "meeting": {
+    "title_pattern": "L10",
+    "organizer": "steve@idcintl.com",
+    "day_of_week": "Thursday",
+    "cadence": "weekly"
+  },
+  "agenda_doc": {
+    "sharepoint_url": "https://idcintl.sharepoint.com/sites/leadership/Shared Documents/L10-Weekly.docx",
+    "sections": [
+      "Last Week's To-Dos",
+      "Roadmap Rocks",
+      "Team Headlines",
+      "IDS",
+      "Proposed new To-Dos"
+    ]
+  },
+  "evidence": {
+    "repos": ["."],
+    "doc_paths": ["docs/", "research/", "docs/decisions/"],
+    "jira_jql_extra": "AND project = PE"
+  },
+  "cross_ownership": {
+    "shared_owners": {
+      "billing-architecture": "Alex Chen",
+      "data-platform": "Priya Raman"
+    }
+  }
+}

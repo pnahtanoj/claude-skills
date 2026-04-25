@@ -1,0 +1,9 @@
+# Eval workspaces — local artifacts from skill-creator runs, not shipped
+*-workspace/
+
+# Local settings (project-scoped Claude settings, may contain secrets)
+.claude/
+
+# Python caches from skill-creator scripts
+__pycache__/
+*.pyc
