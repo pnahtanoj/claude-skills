@@ -54,6 +54,7 @@ Skills live in your Claude config directory and are available in every Claude Co
 |---|---|
 | `context-handoff` | Captures session state into a structured handoff — either a human-readable session summary or a CLAUDE.md block for Claude Code |
 | `granola-tool-routing` | Routes Granola MCP calls to the right fidelity tier (Q&A / prep / persistent artifact / contested) — encodes tier rules, a source-reconciliation rule (transcript > raw notes > AI summary), and attribution conventions |
+| `jira-pe-tickets` | Creates Jira issues on the iDC `PE` board with the team's hierarchy semantics (Epic / Task / Subtask), label taxonomy (domain / source-system / activity / wait-state / cross-cutting), labelling rules, and no-future-phase-clutter convention |
 | `skills-repo` | Manages this repo — add, update, or remove skills and keeps the skill directory, `install.sh`, and README table in sync |
 | `skill-creator` | Creates new skills, runs eval loops with test prompts and benchmarking, iterates based on feedback, and optimizes skill descriptions for triggering accuracy |
 
@@ -167,6 +168,8 @@ claude-skills/
 │   ├── SKILL.md
 │   └── references/
 ├── granola-tool-routing/
+│   └── SKILL.md
+├── jira-pe-tickets/
 │   └── SKILL.md
 ├── skills-repo/
 │   └── SKILL.md
